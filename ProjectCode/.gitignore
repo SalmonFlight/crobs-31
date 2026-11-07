@@ -1,0 +1,41 @@
+### Build output ###
+out/
+target/
+build/
+*.class
+
+### IntelliJ IDEA — personal state (never commit these) ###
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf/
+.idea/httpRequests/
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/sqldialects.xml
+.idea/compiler.xml.bak
+*.iws
+*.ipr
+
+### IntelliJ IDEA — files you MUST commit (do NOT ignore) ###
+# .idea/misc.xml
+# .idea/modules.xml
+# .idea/compiler.xml
+# .idea/encodings.xml
+# .idea/inspectionProfiles/   ← for COMP2021_PROJECT.xml
+# .idea/vcs.xml
+# *.iml                       ← module config, required to open the project
+
+### Generated log files (REQ1) ###
+logs/
+*.log
+log.html
+log.txt
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Editors (optional) ###
+.vscode/

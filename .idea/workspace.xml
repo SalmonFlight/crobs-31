@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="953d59e6-5e51-4fc0-af58-87bfa9a27e34" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/controller/CrobsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/controller/CrobsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/controller/SessionContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/controller/SessionContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/RegularUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/RegularUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/RoomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/RoomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/RoomService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/RoomType.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/RoomType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/SuperAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/SuperAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/model/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/util/IdGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/src/hk/edu/polyu/comp/comp2021/crobs/util/IdGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectCode/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectCode/crobs-31.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectCode/crobs-31.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,10 +14,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3LsdHRSyLmRixYWbhWGML51vesx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -41,10 +30,13 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "feature/member-a-user-auth-room",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/yohan/Downloads/Coding/University/COMP2021/Project/crobs-31",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true"
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "Errors"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -67,5 +59,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

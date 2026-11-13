@@ -4,17 +4,20 @@ import hk.edu.polyu.comp.comp2021.crobs.model.Role;
 import hk.edu.polyu.comp.comp2021.crobs.model.User;
 import hk.edu.polyu.comp.comp2021.crobs.model.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /** Holds the current login and checks command permissions. */
 public class SessionContext {
-    private final Optional<UserRepository> users;
-    private Optional<User> currentUser = Optional.empty();
+    private final UserRepository users;
+    private final boolean resolveCurrentUser;
+    private final List<User> currentUsers = new ArrayList<>(1);
 
     /** Creates an initially logged-out session. */
     public SessionContext() {
-        this.users = Optional.empty();
+        this.users = new UserRepository();
+        this.resolveCurrentUser = false;
     }
 
     /**
@@ -22,7 +25,8 @@ public class SessionContext {
      * @param users the application's user repository
      */
     public SessionContext(UserRepository users) {
-        this.users = Optional.of(Objects.requireNonNull(users, "User repository is required."));
+        this.users = Objects.requireNonNull(users, "User repository is required.");
+        this.resolveCurrentUser = true;
     }
 
     /**
@@ -30,12 +34,13 @@ public class SessionContext {
      * @param user existing user to log in
      */
     public void login(User user) {
-        currentUser = Optional.of(Objects.requireNonNull(user, "User is required."));
+        currentUsers.clear();
+        currentUsers.add(Objects.requireNonNull(user, "User is required."));
     }
 
     /** Clears the current login. */
     public void logout() {
-        currentUser = Optional.empty();
+        currentUsers.clear();
     }
 
     /**
@@ -43,10 +48,14 @@ public class SessionContext {
      * @return the current user, or null when logged out or removed
      */
     public User getCurrentUser() {
-        if (users.isPresent()) {
-            currentUser = currentUser.flatMap(user -> Optional.ofNullable(users.get().get(user.getId())));
+        if (resolveCurrentUser && !currentUsers.isEmpty()) {
+            User latestUser = users.get(currentUsers.get(0).getId());
+            currentUsers.clear();
+            if (latestUser != null) {
+                currentUsers.add(latestUser);
+            }
         }
-        return currentUser.orElse(null);
+        return currentUsers.isEmpty() ? null : currentUsers.get(0);
     }
 
     /**

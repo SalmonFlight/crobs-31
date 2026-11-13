@@ -31,7 +31,7 @@ public enum RoomType {
      */
     public static RoomType fromCommandValue(String value) {
         for (RoomType type : values()) {
-            if (type.commandValue.equals(value)) {
+            if (type.getCommandValue().equals(value)) {
                 return type;
             }
         }

@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class IdGenerator {
     private static final AtomicLong NEXT_USER = new AtomicLong(1);
     private static final AtomicLong NEXT_ROOM = new AtomicLong(1);
+    private static final AtomicLong NEXT_BOOKING = new AtomicLong(1);
 
     private IdGenerator() {
     }
@@ -25,5 +26,13 @@ public final class IdGenerator {
      */
     public static String generateRoomId() {
         return String.format(Locale.ROOT, "R%03d", NEXT_ROOM.getAndIncrement());
+    }
+
+    /**
+     * Generates a booking identifier starting at B001.
+     * @return a new booking ID
+     */
+    public static String generateBookingId() {
+        return String.format(Locale.ROOT, "B%03d", NEXT_BOOKING.getAndIncrement());
     }
 }

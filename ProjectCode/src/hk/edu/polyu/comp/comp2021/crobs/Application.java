@@ -29,6 +29,7 @@ import hk.edu.polyu.comp.comp2021.crobs.model.RoomService;
 import hk.edu.polyu.comp.comp2021.crobs.model.UserRepository;
 import hk.edu.polyu.comp.comp2021.crobs.model.UserService;
 
+import javax.swing.SwingUtilities;
 import java.time.Clock;
 import java.util.Scanner;
 
@@ -46,10 +47,12 @@ public class Application {
     public static void main(String[] args) {
         String htmlPath = "log.html";
         String txtPath = "log.txt";
+        boolean useGui = false;
 
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("-html") && i + 1 < args.length) htmlPath = args[++i];
             if (args[i].equals("-txt") && i + 1 < args.length) txtPath = args[++i];
+            if (args[i].equals("--gui")) useGui = true;
         }
 
         // 1. Initialize Controllers
@@ -69,7 +72,7 @@ public class Application {
         CommandDispatcher dispatcher = new CommandDispatcher(logger, session);
 
         // 4. Register ALL Commands
-        // Member A (Users & Rooms)
+        // Member A
         dispatcher.register(new AddUserCommand(userService));
         dispatcher.register(new RemoveUserCommand(userService));
         dispatcher.register(new ChangeRoleCommand(userService));
@@ -79,13 +82,13 @@ public class Application {
         dispatcher.register(new ModifyRoomCommand(roomService));
         dispatcher.register(new DeleteRoomCommand(roomService));
 
-        // Member B (Bookings)
+        // Member B
         dispatcher.register(new BookCommand(bookingService));
         dispatcher.register(new ModifyBookingCommand(bookingService));
         dispatcher.register(new DeleteBookingCommand(bookingService));
         dispatcher.register(new ScheduleCommand(bookingService));
 
-        // Member C (Infrastructure & Queries)
+        // Member C
         dispatcher.register(new SearchCommand(roomService, bookingService));
         dispatcher.register(new ListRoomCommand(roomService));
         dispatcher.register(new ListAllRoomsCommand(roomService));
@@ -94,13 +97,19 @@ public class Application {
         dispatcher.register(new RedoCommand());
         dispatcher.register(new QuitCommand());
 
-        // 5. Start the REPL Loop
-        System.out.println("CROBS started. Type 'quit' to exit.");
-
-        // Auto-create the SuperAdmin (Required by the PDF)
-        // We suppress the warning because we intentionally ignore the returned object.
+        // Auto-create the SuperAdmin
         userService.getSuperAdmin();
 
+        // 5. Launch GUI or CLI
+        if (useGui) {
+            SwingUtilities.invokeLater(() -> new CrobsGui(dispatcher));
+        } else {
+            runCli(dispatcher);
+        }
+    }
+
+    private static void runCli(CommandDispatcher dispatcher) {
+        System.out.println("CROBS started. Type 'quit' to exit.");
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
@@ -113,7 +122,6 @@ public class Application {
                 break;
             }
         }
-
         scanner.close();
         System.out.println("CROBS closed.");
     }

@@ -13,43 +13,23 @@ import java.util.function.Predicate;
 final class FakeBookingCancellation implements BookingCancellation {
     static final LocalDateTime NOW = LocalDateTime.of(2030, 3, 15, 12, 0);
 
+    // These fields do NOT have the word 'private', so tests can access them directly.
+    boolean failCancellation;
+    boolean failUndo;
+    boolean failRedo;
+    boolean returnNullCancellation;
+    int userCancellations;
+    int roomCancellations;
+
     private final Map<String, Entry> bookings = new LinkedHashMap<>();
-    private boolean failCancellation;
-    private boolean failUndo;
-    private boolean failRedo;
-    private boolean returnNullCancellation;
-    private int userCancellations;
-    private int roomCancellations;
 
-    public void setFailCancellation(boolean failCancellation) {
-        this.failCancellation = failCancellation;
-    }
+    // I removed the setters and getters because they were unused.
 
-    public void setFailUndo(boolean failUndo) {
-        this.failUndo = failUndo;
-    }
-
-    public void setFailRedo(boolean failRedo) {
-        this.failRedo = failRedo;
-    }
-
-    public void setReturnNullCancellation(boolean returnNullCancellation) {
-        this.returnNullCancellation = returnNullCancellation;
-    }
-
-    public int getUserCancellations() {
-        return userCancellations;
-    }
-
-    public int getRoomCancellations() {
-        return roomCancellations;
-    }
-
-    public void add(String id, String userId, String roomId, LocalDateTime start) {
+    void add(String id, String userId, String roomId, LocalDateTime start) {
         bookings.put(id, new Entry(id, userId, roomId, start));
     }
 
-    public boolean contains(String id) {
+    boolean contains(String id) {
         return bookings.containsKey(id);
     }
 

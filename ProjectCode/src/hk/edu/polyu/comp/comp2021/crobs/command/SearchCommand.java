@@ -8,6 +8,7 @@ import hk.edu.polyu.comp.comp2021.crobs.model.RoomService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,8 @@ import java.util.Set;
  * Command to search for available rooms based on criteria.
  */
 public class SearchCommand implements Command {
+    private static final int ARGUMENT_COUNT = 6;
+
     private final RoomService roomService;
     private final BookingService bookingService;
 
@@ -30,13 +33,25 @@ public class SearchCommand implements Command {
         this.bookingService = bookingService;
     }
 
+    /**
+     * Gets the name of the command.
+     *
+     * @return the command name
+     */
     @Override
     public String getName() { return "search"; }
 
+    /**
+     * Executes the search command.
+     *
+     * @param args the command arguments
+     * @param session the current session context
+     * @return the command result
+     * @throws CrobsException if the input format is invalid
+     */
     @Override
     public CommandResult execute(String[] args, SessionContext session) throws CrobsException {
-        // Format: search date startTime endTime minCapacity features
-        if (args.length != 6) {
+        if (args.length != ARGUMENT_COUNT) {
             throw new CrobsException("Usage: search <date> <startTime> <endTime> <minCapacity> <features>");
         }
 
@@ -59,9 +74,7 @@ public class SearchCommand implements Command {
             int count = 0;
 
             for (Room room : allRooms) {
-                // Check capacity and features
                 if (room.getCapacity() >= minCapacity && room.getFeatures().containsAll(requiredFeatures)) {
-                    // Check if it's available at this time
                     if (bookingService.isRoomAvailable(room.getId(), date, startTime, endTime)) {
                         sb.append(String.format("ID: %s | Type: %s | Capacity: %d | Features: %s\n",
                                 room.getId(), room.getType(), room.getCapacity(), room.getFeatures()));
@@ -75,14 +88,20 @@ public class SearchCommand implements Command {
             }
             return CommandResult.success(sb.toString(), null);
 
-        } catch (Exception e) {
-            throw new CrobsException("Invalid format. Ensure date is yyyy-MM-dd and time is HH:mm.");
+        } catch (DateTimeParseException | NumberFormatException e) {
+            throw new CrobsException("Invalid format. Ensure date is yyyy-MM-dd, time is HH:mm, and capacity is a number.");
         }
     }
 
+    /**
+     * Undoes the command.
+     */
     @Override
-    public void undo() throws CrobsException {}
+    public void undo() {}
 
+    /**
+     * Redoes the command.
+     */
     @Override
-    public void redo() throws CrobsException {}
+    public void redo() {}
 }

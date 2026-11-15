@@ -69,9 +69,9 @@ class BookingTest {
         assertEquals(first, first);
         assertEquals(first, sameIdDifferentSlot);
         assertEquals(first.hashCode(), sameIdDifferentSlot.hashCode());
-        assertNotEquals(first, booking("B002", 9, 10));
-        assertNotEquals(first, null);
-        assertNotEquals(first, "B001");
+        assertNotEquals(booking("B002", 9, 10), first);
+        assertNotEquals(null, first);
+        assertNotEquals("B001", first);
     }
 
     /** Overlapping intervals conflict; back-to-back intervals do not. */

@@ -41,8 +41,8 @@ class BookingServiceTest {
     @BeforeEach
     void setUp() {
         RoomRepository rooms = new RoomRepository();
-        rooms.add(new Room(ROOM_A, RoomType.MEETING_ROOM, 10, Collections.<String>emptySet()));
-        rooms.add(new Room(ROOM_B, RoomType.SEMINAR_ROOM, 30, Collections.<String>emptySet()));
+        rooms.add(new Room(ROOM_A, RoomType.MEETING_ROOM, 10, Collections.emptySet()));
+        rooms.add(new Room(ROOM_B, RoomType.SEMINAR_ROOM, 30, Collections.emptySet()));
         bookingRepository = new BookingRepository();
         Clock clock = Clock.fixed(Instant.parse("2026-11-12T12:00:00Z"), ZoneOffset.UTC);
         service = new BookingService(bookingRepository, rooms, clock);
@@ -355,7 +355,7 @@ class BookingServiceTest {
         assertEquals(1, bookingRepository.getAll().size());
     }
 
-    /** Only future bookings of the room are cancelled; past and other rooms' bookings stay. */
+    /** Only future bookings of the room are canceled; past and other rooms' bookings stay. */
     @Test
     void cancelFutureBookingsForRoomKeepsPastBookings() throws CrobsException {
         Booking past = book(ALICE, ROOM_A, LocalDate.of(2026, 11, 1), 9, 10);
@@ -387,7 +387,7 @@ class BookingServiceTest {
         assertEquals(1, bookingRepository.getAll().size());
     }
 
-    /** Redoing a cancellation fails when a cancelled booking was replaced meanwhile. */
+    /** Redoing a cancellation fails when a canceled booking was replaced meanwhile. */
     @Test
     void redoOfCancellationFailsWhenBookingChanged() throws CrobsException {
         Booking first = book(ALICE, ROOM_A, MONDAY, 9, 10);

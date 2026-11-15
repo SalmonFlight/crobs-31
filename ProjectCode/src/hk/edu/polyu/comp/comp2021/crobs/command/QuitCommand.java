@@ -1,6 +1,5 @@
 package hk.edu.polyu.comp.comp2021.crobs.command;
 
-import hk.edu.polyu.comp.comp2021.crobs.controller.CrobsException;
 import hk.edu.polyu.comp.comp2021.crobs.controller.SessionContext;
 
 /**
@@ -22,30 +21,25 @@ public class QuitCommand implements Command {
      * @param args the command arguments
      * @param session the current session context
      * @return the command result
-     * @throws CrobsException if an error occurs
      */
     @Override
-    public CommandResult execute(String[] args, SessionContext session) throws CrobsException {
+    public CommandResult execute(String[] args, SessionContext session) {
         return CommandResult.success("Terminating CROBS...", null);
     }
 
     /**
      * Undoes the command.
-     *
-     * @throws CrobsException if an error occurs
      */
     @Override
-    public void undo() throws CrobsException {
+    public void undo() {
         // Nothing to undo for quit
     }
 
     /**
      * Redoes the command.
-     *
-     * @throws CrobsException if an error occurs
      */
     @Override
-    public void redo() throws CrobsException {
+    public void redo() {
         // Nothing to redo for quit
     }
 }

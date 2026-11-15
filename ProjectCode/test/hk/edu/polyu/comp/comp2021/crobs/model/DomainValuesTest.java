@@ -7,9 +7,19 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/** Tests for domain values and repository validations. */
+@SuppressWarnings("MagicNumber")
 class DomainValuesTest {
+
+    /** Tests that roles follow the correct inheritance hierarchy. */
     @Test
     void userRolesFollowTheDeclaredInheritanceHierarchy() {
         User regular = new RegularUser("U001", "Alex");
@@ -24,6 +34,7 @@ class DomainValuesTest {
         assertFalse(regular instanceof Admin);
     }
 
+    /** Tests that user identity is preserved after role changes. */
     @Test
     void usersCompareByIdentityEvenAfterRoleChanges() {
         User regular = new RegularUser("U001", "Alex");
@@ -32,12 +43,13 @@ class DomainValuesTest {
         assertEquals(regular, promoted);
         assertEquals(promoted, regular);
         assertEquals(regular.hashCode(), promoted.hashCode());
-        assertNotEquals(regular, new RegularUser("U002", "Alex"));
-        assertNotEquals(regular, null);
-        assertNotEquals(regular, "U001");
+        assertNotEquals(new RegularUser("U002", "Alex"), regular);
+        assertNotEquals(null, regular);
+        assertNotEquals("U001", regular);
         assertEquals(1, new HashSet<>(Arrays.asList(regular, promoted)).size());
     }
 
+    /** Tests that invalid user arguments are rejected. */
     @Test
     void rejectsInvalidUserConstructorArguments() {
         assertThrows(IllegalArgumentException.class, () -> new RegularUser(null, "Alex"));
@@ -48,6 +60,7 @@ class DomainValuesTest {
         assertThrows(IllegalArgumentException.class, () -> new Admin("U001", "Alex", Role.REGULAR));
     }
 
+    /** Tests that room equality uses the room ID. */
     @Test
     void roomEqualityUsesPersistentIdentity() {
         Room original = new Room("R001", RoomType.MEETING_ROOM, 10, Collections.emptySet());
@@ -56,11 +69,12 @@ class DomainValuesTest {
         assertEquals(original, updated);
         assertEquals(updated, original);
         assertEquals(original.hashCode(), updated.hashCode());
-        assertNotEquals(original, new Room("R002", RoomType.MEETING_ROOM, 10, Collections.emptySet()));
-        assertNotEquals(original, null);
-        assertNotEquals(original, "R001");
+        assertNotEquals(new Room("R002", RoomType.MEETING_ROOM, 10, Collections.emptySet()), original);
+        assertNotEquals(null, original);
+        assertNotEquals("R001", original);
     }
 
+    /** Tests that invalid room constructor values are rejected. */
     @Test
     void roomConstructorRejectsInvalidValues() {
         assertThrows(IllegalArgumentException.class,
@@ -79,6 +93,7 @@ class DomainValuesTest {
                 () -> new Room("R001", RoomType.MEETING_ROOM, 10, Collections.singleton(null)));
     }
 
+    /** Tests room type command spellings. */
     @Test
     void roomTypesRoundTripTheSpecifiedCommandSpellings() {
         String[] commandValues = {"lectureTheatre", "computerLab", "seminarRoom", "meetingRoom"};
@@ -93,6 +108,7 @@ class DomainValuesTest {
         assertThrows(IllegalArgumentException.class, () -> RoomType.fromCommandValue("office"));
     }
 
+    /** Tests the user repository. */
     @Test
     void userRepositoryRejectsDuplicateIdsAndReturnsDetachedLists() {
         UserRepository repository = new UserRepository();
@@ -110,6 +126,7 @@ class DomainValuesTest {
         assertTrue(repository.getAll().isEmpty());
     }
 
+    /** Tests the room repository. */
     @Test
     void roomRepositoryRejectsDuplicateIdsAndReturnsDetachedLists() {
         RoomRepository repository = new RoomRepository();

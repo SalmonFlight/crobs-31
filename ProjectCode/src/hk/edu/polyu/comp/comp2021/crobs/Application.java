@@ -1,8 +1,33 @@
 package hk.edu.polyu.comp.comp2021.crobs;
 
-import hk.edu.polyu.comp.comp2021.crobs.command.*;
-import hk.edu.polyu.comp.comp2021.crobs.controller.*;
-import hk.edu.polyu.comp.comp2021.crobs.model.*;
+import hk.edu.polyu.comp.comp2021.crobs.command.AddRoomCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.AddUserCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.BookCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.ChangeRoleCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.DeleteBookingCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.DeleteRoomCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.ListAllRoomsCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.ListBookingsCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.ListRoomCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.LoginCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.LogoutCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.ModifyBookingCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.ModifyRoomCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.QuitCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.RedoCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.RemoveUserCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.ScheduleCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.SearchCommand;
+import hk.edu.polyu.comp.comp2021.crobs.command.UndoCommand;
+import hk.edu.polyu.comp.comp2021.crobs.controller.CommandDispatcher;
+import hk.edu.polyu.comp.comp2021.crobs.controller.CommandLogger;
+import hk.edu.polyu.comp.comp2021.crobs.controller.SessionContext;
+import hk.edu.polyu.comp.comp2021.crobs.model.BookingRepository;
+import hk.edu.polyu.comp.comp2021.crobs.model.BookingService;
+import hk.edu.polyu.comp.comp2021.crobs.model.RoomRepository;
+import hk.edu.polyu.comp.comp2021.crobs.model.RoomService;
+import hk.edu.polyu.comp.comp2021.crobs.model.UserRepository;
+import hk.edu.polyu.comp.comp2021.crobs.model.UserService;
 
 import java.time.Clock;
 import java.util.Scanner;
@@ -17,6 +42,7 @@ public class Application {
      *
      * @param args command line arguments
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void main(String[] args) {
         String htmlPath = "log.html";
         String txtPath = "log.txt";
@@ -72,11 +98,8 @@ public class Application {
         System.out.println("CROBS started. Type 'quit' to exit.");
 
         // Auto-create the SuperAdmin (Required by the PDF)
-        try {
-            userService.getSuperAdmin();
-        } catch (Exception e) {
-            // Ignore if already created
-        }
+        // We suppress the warning because we intentionally ignore the returned object.
+        userService.getSuperAdmin();
 
         Scanner scanner = new Scanner(System.in);
         boolean running = true;

@@ -53,10 +53,12 @@ public class CommandDispatcher {
 
         // BON2: Handle Undo and Redo manually
         if (commandName.equals("undo")) {
-            return handleUndo(inputLine);
+            handleUndo(inputLine);
+            return true;
         }
         if (commandName.equals("redo")) {
-            return handleRedo(inputLine);
+            handleRedo(inputLine);
+            return true;
         }
 
         Command command = commands.get(commandName);
@@ -92,10 +94,10 @@ public class CommandDispatcher {
         return true;
     }
 
-    private boolean handleUndo(String inputLine) {
+    private void handleUndo(String inputLine) {
         if (undoStack.isEmpty()) {
             System.out.println("Nothing to undo.");
-            return true;
+            return;
         }
         Command command = undoStack.pop();
         try {
@@ -107,13 +109,12 @@ public class CommandDispatcher {
             System.out.println("Error during undo: " + e.getMessage());
             undoStack.push(command); // Put it back if it failed
         }
-        return true;
     }
 
-    private boolean handleRedo(String inputLine) {
+    private void handleRedo(String inputLine) {
         if (redoStack.isEmpty()) {
             System.out.println("Nothing to redo.");
-            return true;
+            return;
         }
         Command command = redoStack.pop();
         try {
@@ -125,7 +126,6 @@ public class CommandDispatcher {
             System.out.println("Error during redo: " + e.getMessage());
             redoStack.push(command); // Put it back if it failed
         }
-        return true;
     }
 
     // Helper to exclude commands from the undo stack (like quit, list, login)

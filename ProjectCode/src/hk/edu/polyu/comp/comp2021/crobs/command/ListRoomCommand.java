@@ -56,8 +56,8 @@ public class ListRoomCommand implements Command {
     }
 
     @Override
-    public void undo() throws CrobsException {}
+    public void undo() {}
 
     @Override
-    public void redo() throws CrobsException {}
+    public void redo() {}
 }

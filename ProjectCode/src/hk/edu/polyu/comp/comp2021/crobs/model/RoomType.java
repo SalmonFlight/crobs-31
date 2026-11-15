@@ -2,7 +2,7 @@ package hk.edu.polyu.comp.comp2021.crobs.model;
 
 /** The room categories supported by CROBS. */
 public enum RoomType {
-    /** A room arranged as a lecture theatre. */
+    /** A room arranged as a lecture theater. */
     LECTURE_THEATRE("lectureTheatre"),
     /** A room equipped as a computer laboratory. */
     COMPUTER_LAB("computerLab"),

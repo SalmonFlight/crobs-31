@@ -34,8 +34,10 @@ public class SessionContext {
      * @param user existing user to log in
      */
     public void login(User user) {
+        // FIX: Check for null BEFORE clearing the existing login
+        Objects.requireNonNull(user, "User is required.");
         currentUsers.clear();
-        currentUsers.add(Objects.requireNonNull(user, "User is required."));
+        currentUsers.add(user);
     }
 
     /** Clears the current login. */
